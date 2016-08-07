@@ -7,24 +7,11 @@ template = ->
    @title "Predict"
    @meta name: "viewport", content: "width=device-width, initial-scale=1.0"
    @meta name: "apple-mobile-web-app-capable", content:"yes"
-   @link
-    href: 'http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900'
-    rel: 'stylesheet'
-    type: 'text/css'
-   @link
-    href: 'https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic'
-    rel: 'stylesheet'
-    type: 'text/css'
 
-   @link href: "lib/Font-Awesome/css/font-awesome.css", rel: "stylesheet"
    @link href: "lib/bootstrap/css/bootstrap.css", rel: "stylesheet"
-   @link href: "lib/CodeMirror/lib/codemirror.css", rel: "stylesheet"
    @link href: "css/style.css", rel: "stylesheet"
-   @link href: "css/editor.css", rel: "stylesheet"
 
   @body ->
-   @script src:"lib/CodeMirror/lib/codemirror.js"
-
    @script src:"lib/weya/weya.js"
    @script src:"lib/weya/base.js"
    @script src:"lib/mod/mod.js"

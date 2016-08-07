@@ -81,7 +81,6 @@ Mod.require 'Weya.Base',
 document.addEventListener 'DOMContentLoaded', ->
  Mod.set 'Weya', Weya
  Mod.set 'Weya.Base', Weya.Base
- Mod.set 'CodeMirror', CodeMirror
 
  Mod.debug true
 
