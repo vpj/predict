@@ -6,6 +6,7 @@ Mod.require 'Weya.Base',
    @initialize ->
     @elems =
      parent: document.body
+    @algorithms = []
 
    @listen 'error', (e) ->
     console.error e
@@ -13,9 +14,10 @@ Mod.require 'Weya.Base',
    render: ->
     Weya elem: @elems.parent, context: this, ->
      @$.elems.canvas = @canvas "#canvas", null
+     @br()
+     @$.elems.algorithms = @div null
+     @br()
      @div ->
-      @button ".btn.btn-primary", "Run", on: {click: @$.on.runClick}
-      @span " "
       @button ".btn.btn-default", "Clear", on: {click: @$.on.clearClick}
 
     @elems.canvas.addEventListener 'click', @on.canvasClick
@@ -27,6 +29,30 @@ Mod.require 'Weya.Base',
     @points =
      x: []
      y: []
+
+   addAlgorithm: (algorithm) ->
+    self = this
+    n = @algorithms.length
+    @algorithms.push algorithm
+    Weya elem: @elems.algorithms, context: this, ->
+     @div ->
+      @button ".btn.btn-info", algorithm.name,
+       on:
+        click: (e) ->
+         e.preventDefault()
+         self.runAlgorithm n
+
+   runAlgorithm: (n) ->
+    algorithm = @algorithms[n]
+    res = algorithm.func @points.x, @points.y
+    ctx = @elems.canvas.getContext '2d'
+    ctx.beginPath()
+    W = @W
+    ctx.strokeStyle = 'red'
+    ctx.moveTo res.x[0] * W, res.y[0] * W
+    for i in [1...res.x.length]
+     ctx.lineTo res.x[i] * W, res.y[i] * W
+    ctx.stroke()
 
    @listen 'canvasClick', (e) ->
     x = e.pageX - @elems.canvas.offsetLeft
@@ -50,6 +76,7 @@ Mod.require 'Weya.Base',
 
   APP = new App()
   APP.render()
+  Mod.set 'App', APP
 
 document.addEventListener 'DOMContentLoaded', ->
  Mod.set 'Weya', Weya

@@ -5,6 +5,7 @@ index = require '../ui-assets/index.coffee'
 
 UI_JS = [
  'main'
+ 'algorithms/linear_regression'
 ]
 
 UI_LESS = [
